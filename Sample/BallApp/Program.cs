@@ -12,6 +12,10 @@ namespace BallApp {
         private Timer moveTimer;  //タイマー用
         private SoccerBall soccerBall;
         private PictureBox pb;
+
+        private List<SoccerBall> balls = new List<SoccerBall>(); //ボールインスタンス格納用 
+        private List<PictureBox> pbs = new List<PictureBox>(); //表示用
+
         static void Main(string[] args) {
             Application.Run(new Program());
         }
@@ -32,7 +36,7 @@ namespace BallApp {
         }
         //マウスクリック時のイベントハンドラ
         private void Program_MouseClick(object sender, MouseEventArgs e) {
-            //ボールインスタンス生成
+            //ボールインスタンス作成
             soccerBall = new SoccerBall(e.X -25,e.Y -25);
             pb = new PictureBox(); //画像を表示するコントロール
             pb.Image = soccerBall.Image;
@@ -41,13 +45,18 @@ namespace BallApp {
             pb.SizeMode = PictureBoxSizeMode.StretchImage; //画像の表示モード
             pb.Parent = this;
 
+            balls.Add(soccerBall);
+            pbs.Add(pb);
+
             moveTimer.Start(); //タイマースタート
         }
 
         //タイマーアウト時のイベントハンドラ
         private void MoveTimer_Tick(object sender, EventArgs e) {
-            soccerBall.Move();  //移動
-            pb.Location = new Point((int)soccerBall.PosX, (int)soccerBall.PosY); //画像の位置
+            for (int i = 0; i < balls.Count; i++) {
+                balls[i].Move();  //移動
+                pbs[i].Location = new Point((int)balls[i].PosX, (int)balls[i].PosY);
+            }
         }
     }
 }
