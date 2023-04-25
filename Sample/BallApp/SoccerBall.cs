@@ -8,12 +8,12 @@ using System.Threading.Tasks;
 namespace BallApp {
     class SoccerBall : Obj {
         //フィールド
-       
+
         Random rand = new Random();
 
         //コンストラクタ
-        public SoccerBall(double xp,double yp) 
-            : base(xp,yp, @"pic\soccer_ball.png") {
+        public SoccerBall(double xp, double yp)
+            : base(xp, yp, @"pic\soccer_ball.png") {
 
             int rndX = rand.Next(-10, 10);
             MoveX = (rndX != 0 ? rndX : 1);
@@ -21,7 +21,6 @@ namespace BallApp {
             int rndY = rand.Next(-10, 10);
             MoveY = (rndY != 0 ? rndY : 1);
         }
-
         //メソッド
         public override void Move() {
             if (PosY > 520 || PosY < 0)
@@ -32,10 +31,8 @@ namespace BallApp {
             {
                 MoveX = -MoveX;
             }
-           
             PosX += MoveX;
             PosY += MoveY;
-
         }
     }
 }

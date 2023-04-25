@@ -30,11 +30,8 @@ namespace BallApp {
 
             moveTimer = new Timer();
             moveTimer.Interval = 10; //タイマーのインターバル(ms)
-
             moveTimer.Tick += MoveTimer_Tick;  //デリゲート登録
-
         }
-
         //マウスクリック時のイベントハンドラ
         private void Program_MouseClick(object sender, MouseEventArgs e) {
             if (e.Button == MouseButtons.Left)
@@ -42,8 +39,10 @@ namespace BallApp {
                 //ボールインスタンス作成
                 this.Text = "Ballgame" + "(" + ++BallCount + ")";
                 obj = new SoccerBall(e.X - 25, e.Y - 25);
+
+
             }
-            if (e.Button == MouseButtons.Right)
+            else if(e.Button == MouseButtons.Right)
             {
                 this.Text = "Ballgame" + "(" + ++BallCount + ")";
                 obj = new TennisBall(e.X - 25, e.Y - 25);
@@ -58,9 +57,7 @@ namespace BallApp {
             pbs.Add(pb);
 
             moveTimer.Start(); //タイマースタート
-
         }
-
 
         //タイマーアウト時のイベントハンドラ
         private void MoveTimer_Tick(object sender, EventArgs e) {
