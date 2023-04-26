@@ -9,7 +9,7 @@ using System.Windows.Forms;
 namespace BallApp {
     class Program : Form {
 
-        Bar bar;            //Baeインスタンス格納
+        Bar bar;            //Barインスタンス格納
         PictureBox pbBar;   //Bar表示用
 
         private Timer moveTimer;  //タイマー用
@@ -83,7 +83,7 @@ namespace BallApp {
         private void MoveTimer_Tick(object sender, EventArgs e) {
             for (int i = 0; i < ball.Count; i++)
             {
-                ball[i].Move();  //移動
+                ball[i].Move(pbBar,pbs[i]);  //移動
                 pbs[i].Location = new Point((int)ball[i].PosX, (int)ball[i].PosY);
             }
         }
