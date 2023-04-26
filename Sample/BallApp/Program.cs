@@ -15,8 +15,6 @@ namespace BallApp {
         private List<Obj> ball = new List<Obj>(); //ボールインスタンス格納用 
         private List<PictureBox> pbs = new List<PictureBox>(); //表示用
 
-        private int BallCount = 0;
-
         static void Main(string[] args) {
             Application.Run(new Program());
         }
@@ -27,34 +25,40 @@ namespace BallApp {
             this.BackColor = Color.Green;
             this.Text = "BallGame";
             this.MouseClick += Program_MouseClick;
+            this.KeyDown += Program_KeyDown;
 
             moveTimer = new Timer();
             moveTimer.Interval = 10; //タイマーのインターバル(ms)
             moveTimer.Tick += MoveTimer_Tick;  //デリゲート登録
         }
+
+        //キーが押された時のイベントハンドラ
+        private void Program_KeyDown(object sender, KeyEventArgs e) {
+
+        }
         //マウスクリック時のイベントハンドラ
         private void Program_MouseClick(object sender, MouseEventArgs e) {
+            pb = new PictureBox(); //画像を表示するコントロール
             if (e.Button == MouseButtons.Left)
             {
                 //ボールインスタンス作成
-                this.Text = "Ballgame" + "(" + ++BallCount + ")";
                 obj = new SoccerBall(e.X - 25, e.Y - 25);
-
-
+                pb.Size = new Size(50, 50); //画像の表示サイズ
             }
-            else if(e.Button == MouseButtons.Right)
+            else if (e.Button == MouseButtons.Right)
             {
-                this.Text = "Ballgame" + "(" + ++BallCount + ")";
                 obj = new TennisBall(e.X - 25, e.Y - 25);
+                pb.Size = new Size(25, 25); //画像の表示サイズ
             }
-            pb = new PictureBox(); //画像を表示するコントロール
+
             pb.Image = obj.Image;
             pb.Location = new Point((int)obj.PosX, (int)obj.PosY); //画像の位置
-            pb.Size = new Size(50, 50); //画像の表示サイズ
             pb.SizeMode = PictureBoxSizeMode.StretchImage; //画像の表示モード
             pb.Parent = this;
             ball.Add(obj);
             pbs.Add(pb);
+
+            this.Text = "サッカーボール:" + SoccerBall.Cnt + "テニスボール:" + TennisBall.Cnt;
 
             moveTimer.Start(); //タイマースタート
         }
