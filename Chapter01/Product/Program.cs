@@ -17,7 +17,7 @@ namespace ProductSample {
             //Console.WriteLine(daihuku.GetPriceIncludingTax());
             #endregion
 
-            #region
+            #region　演習１
             //DateTime data = new DateTime(2023, 5, 8);
             DateTime date = DateTime.Today;
             string str = date.ToString("yyyy年MM月dd日");
@@ -33,6 +33,7 @@ namespace ProductSample {
             Console.WriteLine("10日前:" + daysBefor10.ToString("yyyy年MM月dd日") + "です。");
             #endregion
 
+            #region　演習２
             Console.WriteLine("誕生日を入力:");
             Console.Write("西暦:");
             int year = int.Parse(Console.ReadLine());
@@ -47,9 +48,11 @@ namespace ProductSample {
             TimeSpan time = dateToday - birthday;
 
             Console.WriteLine("あなたは生まれてから今日まで" + (time.Days) + "日目です");
+            #endregion
 
-
+            #region　演習３
             Console.WriteLine("あなたは" + birthday.ToString("dddd") + "に生まれました。");
+            #endregion
         }
     }
 }
