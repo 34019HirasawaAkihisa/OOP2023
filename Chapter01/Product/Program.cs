@@ -48,6 +48,8 @@ namespace ProductSample {
 
             Console.WriteLine("あなたは生まれてから今日まで" + (time.Days) + "日目です");
 
+
+            Console.WriteLine("あなたは" + birthday.ToString("dddd") + "に生まれました。");
         }
     }
 }
