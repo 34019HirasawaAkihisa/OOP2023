@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace SalesCalculator {
     //売上クラス
-    class Sale {
+    public class Sale {
         //店舗名
         public string ShopName { get; set; }
         //商品カテゴリー
