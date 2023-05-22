@@ -16,7 +16,7 @@ namespace Exercise03 {
         }
 
         //カテゴリ別の売り上げを求める
-        public IDictionary<string, int> GetPerStoreSales() {
+        public IDictionary<string, int> GetPerProductCategory() {
             var dict = new SortedDictionary<string, int>();
             foreach (Sale sale in _sales) {
                 if (dict.ContainsKey(sale.ProductCategory))
@@ -26,6 +26,19 @@ namespace Exercise03 {
             }
             return dict;
         }
+
+        //店舗別の売り上げを求める
+        public IDictionary<string, int> GetPerStoreSales() {
+            var dict = new SortedDictionary<string, int>();
+            foreach (Sale sale in _sales) {
+                if (dict.ContainsKey(sale.ShopName))
+                    dict[sale.ShopName] += sale.Amount;　//店名が既に存在する
+                else
+                    dict[sale.ShopName] = sale.Amount; //店名が存在しない (新規格納)
+            }
+            return dict;
+        }
+
         //売上データを読み込み、Saleオブジェクトのリストを返す
         private static IEnumerable<Sale> ReadSales(string filePath) {
            var sales = new List<Sale>(); //売上データを格納する
@@ -41,6 +54,7 @@ namespace Exercise03 {
                 };
                 sales.Add(sale); //Saleインスタンスをコレクションに追加
             }
+
             return sales;
         }
     }
