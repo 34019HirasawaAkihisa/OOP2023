@@ -11,6 +11,7 @@ namespace Exercise03 {
             Console.WriteLine("**売上集計**");
             Console.WriteLine("1.店舗別売上");
             Console.WriteLine("2.商品カテゴリー別売上");
+            Console.Write(">");
             int num = int.Parse(Console.ReadLine());
             if (num == 1) {
                 var amountPerStore = sales.GetPerStoreSales();
