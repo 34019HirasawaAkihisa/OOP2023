@@ -12,9 +12,7 @@ namespace Section01 {
 
             //int count = numbers.Count(n => n % 5 == 0 && n != 0);
             //合計値
-            var sum = numbers.Where(n => n % 2 == 0).Average();
-
-            Console.WriteLine(sum); ;
+            var sum = numbers.Where(n => n % 2 == 0).z();
         }
     }
 }
