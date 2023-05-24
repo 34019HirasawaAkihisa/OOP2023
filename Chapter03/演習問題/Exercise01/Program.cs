@@ -37,13 +37,24 @@ namespace Exercise01 {
         }
 
         private static void Exercise1_2(List<int> numbers) {
-            var names = numbers.FindAll(s => );
+            var divide = numbers.Select(s => s / 2.0);
+            foreach (var n in divide) {
+                Console.WriteLine(n);
+            }
         }
 
         private static void Exercise1_3(List<int> numbers) {
+            var query = numbers.Where(s => s >= 50);
+            foreach (var n in query) {
+                Console.WriteLine(n);
+            }
         }
 
         private static void Exercise1_4(List<int> numbers) {
+            var multiple = numbers.Select(s => s * 2);
+            foreach (var n in multiple) {
+                Console.WriteLine(n);
+            }
         }
     }
 }
