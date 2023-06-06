@@ -25,7 +25,7 @@ namespace Exercise03 {
         }
 
         private static void Exercise3_1(string text) {
-            var cnt = text.Count(s => s == ' ');
+            var cnt = text.Count(c => c == ' ');
             Console.WriteLine(cnt);
         }
 
@@ -47,10 +47,11 @@ namespace Exercise03 {
         }
 
         private static void Exercise3_5(string text) {
-            var split = text.Split(' ').ToList();
+            var split = text.Split(' ').ToArray();
             StringBuilder sb = new StringBuilder();
-            foreach (var word in split) {
-                sb.Append(word + ' ');
+            sb.Append(split[0]);
+            foreach (var word in split.Skip(1)) {
+                sb.Append(' ' + word);
             }
             var ts = sb.ToString();
             Console.WriteLine(ts);
