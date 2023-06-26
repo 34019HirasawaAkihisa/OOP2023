@@ -46,10 +46,11 @@ namespace Section02 {
             Console.WriteLine("1:一覧表,2:県名指定");
             Console.Write(">");
             string num = Console.ReadLine();
+
             if (num == "1") {
                 foreach (var s in PrefectureDict) {
-                    Console.WriteLine("<<{0}>>:",s.Key);
-                    foreach (var term in s.Value) {
+                    Console.WriteLine("<<{0}>>:", s.Key);
+                    foreach (var term in s.Value.OrderByDescending(x => x.Population)) {
                         Console.Write("|{0}:{1}人|", term.City, term.Population);
                     }
                     Console.WriteLine();
@@ -58,7 +59,7 @@ namespace Section02 {
             else {
                 Console.Write("県名を入力:");
                 string pre = Console.ReadLine();
-                foreach (var term in PrefectureDict[pre]) {
+                foreach (var term in PrefectureDict[pre].OrderByDescending(s => s.Population)) {
                     Console.Write("|{0}:{1}人|", term.City, term.Population);
                 }
             }
