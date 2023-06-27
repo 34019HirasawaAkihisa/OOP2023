@@ -14,6 +14,6 @@ namespace SalesCalculator {
         //売上高
         public int Amount { get; set; }
 
-        }
+        
     }
 }
