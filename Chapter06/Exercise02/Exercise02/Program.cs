@@ -52,7 +52,7 @@ namespace Exercise02 {
         private static void Exercise2_3(List<Book> books) {
 
         }
-        ::::
+        
         private static void Exercise2_4(List<Book> books) {
 
         }
