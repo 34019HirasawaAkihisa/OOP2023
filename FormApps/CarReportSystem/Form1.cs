@@ -20,25 +20,16 @@ namespace CarReportSystem {
 
         //追加ボタンがクリックされた時のイベントハンドラー
         private void btAddReport_Click(object sender, EventArgs e) {
-            var carReport = new CarReport();
-            carReport.Date = dtpDate.Value;
-            carReport.Author = cbAuthor.Text;
-            carReport.Maker = getMakerGroup();
-            carReport.CarName = cbCarName.Text;
-            carReport.Report = tbReport.Text;
-
+            var carReport = new CarReport() {
+                Date = dtpDate.Value,
+                Author = cbAuthor.Text,
+                CarName = cbCarName.Text,
+                Report = tbReport.Text,
+            };
             carReports.Add(carReport);
-            dgvCarReports.DataSource = carReports;
         }
-
         private CarReport.MakerGroup getMakerGroup() {
-
-            return CarReport.MakerGroup.その他;
-
-        }
-
-        private void gbMaker_Enter(object sender, EventArgs e) {
-
+            return CarReport.MakerGroup.トヨタ;
         }
     }
 }

@@ -124,7 +124,6 @@ namespace CarReportSystem {
             this.gbMaker.Size = new System.Drawing.Size(278, 81);
             this.gbMaker.TabIndex = 4;
             this.gbMaker.TabStop = false;
-            this.gbMaker.Enter += new System.EventHandler(this.gbMaker_Enter);
             // 
             // rbImported
             // 
@@ -191,6 +190,7 @@ namespace CarReportSystem {
             this.rbHonda.TabStop = true;
             this.rbHonda.Text = "ホンダ";
             this.rbHonda.UseVisualStyleBackColor = true;
+         
             // 
             // rbNissan
             // 
@@ -202,7 +202,7 @@ namespace CarReportSystem {
             this.rbNissan.TabStop = true;
             this.rbNissan.Text = "日産";
             this.rbNissan.UseVisualStyleBackColor = true;
-            // 
+          
             // rbToyota
             // 
             this.rbToyota.AutoSize = true;
@@ -213,6 +213,7 @@ namespace CarReportSystem {
             this.rbToyota.TabStop = true;
             this.rbToyota.Text = "トヨタ";
             this.rbToyota.UseVisualStyleBackColor = true;
+           
             // 
             // cbCarName
             // 
