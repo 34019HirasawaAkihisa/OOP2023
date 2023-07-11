@@ -25,11 +25,38 @@ namespace CarReportSystem {
                 Author = cbAuthor.Text,
                 CarName = cbCarName.Text,
                 Report = tbReport.Text,
+                Maker = getMakerGroup(),
+                CarImage = pbCarImage.Image,
             };
             carReports.Add(carReport);
         }
         private CarReport.MakerGroup getMakerGroup() {
-            return CarReport.MakerGroup.トヨタ;
+            foreach (var item in gbMaker.Controls) {
+                if (((RadioButton)item).Checked) {
+                    return (CarReport.MakerGroup)int.Parse(((RadioButton)item).Tag.ToString());
+                }
+            }
+            return CarReport.MakerGroup.その他;
+        }
+
+        private void btImageOpen_Click(object sender, EventArgs e) {
+            ofdImageFileOpen.ShowDialog();
+            pbCarImage.Image = Image.FromFile(ofdImageFileOpen.FileName);
+        }
+
+        private void btDeleteReport_Click(object sender, EventArgs e) {
+            DataGridViewSelectedRowCollection src = dgvCarReports.SelectedRows;
+            for (int i = src.Count - 1; i >= 0; i--) {
+                dgvCarReports.Rows.RemoveAt(src[i].Index);
+            }
+        }
+
+        private void Form1_Load(object sender, EventArgs e) {
+            dgvCarReports.Columns[5].Visible = false; //画像項目非表示
+        }
+
+        private void dgvCarReports_CellContentClick(object sender, DataGridViewCellEventArgs e) {
+         //   cbAuthor.Text = dgvCarReports.SelectedRows.
         }
     }
 }
