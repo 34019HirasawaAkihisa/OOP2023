@@ -347,6 +347,7 @@ namespace CarReportSystem {
             this.btModifyReport.TabIndex = 12;
             this.btModifyReport.Text = "修正";
             this.btModifyReport.UseVisualStyleBackColor = false;
+            this.btModifyReport.Click += new System.EventHandler(this.btModifyReport_Click);
             // 
             // btDeleteReport
             // 
