@@ -13,6 +13,9 @@ namespace CarReportSystem {
         //管理用データ
         BindingList<CarReport> carReports = new BindingList<CarReport>();
 
+        ColorDialog cd = new ColorDialog();
+
+
         public Form1() {
             InitializeComponent();
             dgvCarReports.DataSource = carReports;
@@ -183,6 +186,16 @@ namespace CarReportSystem {
                 btModifyReport.Enabled = true;
                 btDeleteReport.Enabled = true;
             }
+        }
+
+        private void 開くOToolStripMenuItem_Click(object sender, EventArgs e) {
+
+        }
+
+
+        private void 色設定ToolStripMenuItem_Click(object sender, EventArgs e) {
+            cd.ShowDialog();
+            this.BackColor = cd.Color;
         }
     }
 }
