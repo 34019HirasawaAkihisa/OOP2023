@@ -1,20 +1,14 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.ComponentModel;
-using System.Data;
 using System.Drawing;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows.Forms;
 
 namespace CarReportSystem {
     public partial class Form1 : Form {
         //管理用データ
         BindingList<CarReport> carReports = new BindingList<CarReport>();
-
-        ColorDialog cd = new ColorDialog();
-
+        
+        int mode = 0;
 
         public Form1() {
             InitializeComponent();
@@ -107,8 +101,9 @@ namespace CarReportSystem {
         }
 
         private void btImageOpen_Click(object sender, EventArgs e) {
-            ofdImageFileOpen.ShowDialog();
-            pbCarImage.Image = Image.FromFile(ofdImageFileOpen.FileName);
+            if (ofdImageFileOpen.ShowDialog() == DialogResult.OK) {
+                pbCarImage.Image = Image.FromFile(ofdImageFileOpen.FileName);
+            }
         }
 
         //削除ボタンのイベントハンドラ
@@ -166,7 +161,7 @@ namespace CarReportSystem {
 
         private void バージョン情報ToolStripMenuItem_Click(object sender, EventArgs e) {
             var vf = new VersionForm();
-          vf.ShowDialog();  //モーダルダイヤログとして表示
+            vf.ShowDialog();  //モーダルダイヤログとして表示
         }
 
         private void btImageDelete_Click(object sender, EventArgs e) {
@@ -175,16 +170,18 @@ namespace CarReportSystem {
 
         //レコードの選択時
         private void dgvCarReports_Click(object sender, EventArgs e) {
-            dtpDate.Text = dgvCarReports.CurrentRow.Cells[0].Value.ToString();
-            cbAuthor.Text = dgvCarReports.CurrentRow.Cells[1].Value.ToString();
-            setSelectedMaker((CarReport.MakerGroup)dgvCarReports.CurrentRow.Cells[2].Value);
-            cbCarName.Text = dgvCarReports.CurrentRow.Cells[3].Value.ToString();
-            tbReport.Text = dgvCarReports.CurrentRow.Cells[4].Value.ToString();
-            pbCarImage.Image = (Image)dgvCarReports.CurrentRow.Cells[5].Value;
+            if (dgvCarReports.RowCount != 0) {
+                dtpDate.Text = dgvCarReports.CurrentRow.Cells[0].Value.ToString();
+                cbAuthor.Text = dgvCarReports.CurrentRow.Cells[1].Value.ToString();
+                setSelectedMaker((CarReport.MakerGroup)dgvCarReports.CurrentRow.Cells[2].Value);
+                cbCarName.Text = dgvCarReports.CurrentRow.Cells[3].Value.ToString();
+                tbReport.Text = dgvCarReports.CurrentRow.Cells[4].Value.ToString();
+                pbCarImage.Image = (Image)dgvCarReports.CurrentRow.Cells[5].Value;
 
-            if (dgvCarReports.CurrentRow != null) {
-                btModifyReport.Enabled = true;
-                btDeleteReport.Enabled = true;
+                if (dgvCarReports.CurrentRow != null) {
+                    btModifyReport.Enabled = true;
+                    btDeleteReport.Enabled = true;
+                }
             }
         }
 
@@ -194,8 +191,14 @@ namespace CarReportSystem {
 
 
         private void 色設定ToolStripMenuItem_Click(object sender, EventArgs e) {
-            cd.ShowDialog();
-            this.BackColor = cd.Color;
+            if (cdColor.ShowDialog() == DialogResult.OK) {
+                BackColor = cdColor.Color;
+            }
+        }
+
+        private void btScaleChange_Click(object sender, EventArgs e) {
+            mode = mode < 4 ? ++mode : 0;
+            pbCarImage.SizeMode = (PictureBoxSizeMode)mode;
         }
     }
 }

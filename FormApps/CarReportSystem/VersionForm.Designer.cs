@@ -26,6 +26,7 @@ namespace CarReportSystem {
         private void InitializeComponent() {
             this.btok = new System.Windows.Forms.Button();
             this.cdColor = new System.Windows.Forms.ColorDialog();
+            this.textBox1 = new System.Windows.Forms.TextBox();
             this.SuspendLayout();
             // 
             // btok
@@ -38,17 +39,26 @@ namespace CarReportSystem {
             this.btok.UseVisualStyleBackColor = true;
             this.btok.Click += new System.EventHandler(this.btok_Click);
             // 
+            // textBox1
+            // 
+            this.textBox1.Location = new System.Drawing.Point(26, 22);
+            this.textBox1.Name = "textBox1";
+            this.textBox1.Size = new System.Drawing.Size(100, 19);
+            this.textBox1.TabIndex = 1;
+            // 
             // VersionForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(279, 227);
+            this.Controls.Add(this.textBox1);
             this.Controls.Add(this.btok);
             this.MaximizeBox = false;
             this.MinimizeBox = false;
             this.Name = "VersionForm";
             this.Text = "VersionForm";
             this.ResumeLayout(false);
+            this.PerformLayout();
 
         }
 
@@ -56,5 +66,6 @@ namespace CarReportSystem {
 
         private System.Windows.Forms.Button btok;
         private System.Windows.Forms.ColorDialog cdColor;
+        private System.Windows.Forms.TextBox textBox1;
     }
 }
