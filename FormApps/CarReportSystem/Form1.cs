@@ -2,11 +2,16 @@
 using System.ComponentModel;
 using System.Drawing;
 using System.Windows.Forms;
+using System.Xml;
+using System.Xml.Serialization;
 
 namespace CarReportSystem {
     public partial class Form1 : Form {
         //管理用データ
         BindingList<CarReport> carReports = new BindingList<CarReport>();
+
+        //設定情報保存用オブジェクト
+        Settings settings = new Settings();
         
         int mode = 0;
 
@@ -124,8 +129,15 @@ namespace CarReportSystem {
 
         private void Form1_Load(object sender, EventArgs e) {
             dgvCarReports.Columns[5].Visible = false; //画像項目非表示
-                btModifyReport.Enabled = false; //マスクする
-                btDeleteReport.Enabled = false;
+            btModifyReport.Enabled = false; //マスクする
+            btDeleteReport.Enabled = false;
+
+            //設定ファイル逆シリアル化して背景に設定
+            using (var reader = XmlReader.Create("bColor.xml")) {
+                var serializer = new XmlSerializer(typeof(Settings));
+                settings = serializer.Deserialize(reader) as Settings;
+                BackColor = Color.FromArgb(settings.MainFormColor);
+            } 
         }
 
   
@@ -185,20 +197,24 @@ namespace CarReportSystem {
             }
         }
 
-        private void 開くOToolStripMenuItem_Click(object sender, EventArgs e) {
-
-        }
-
-
         private void 色設定ToolStripMenuItem_Click(object sender, EventArgs e) {
             if (cdColor.ShowDialog() == DialogResult.OK) {
                 BackColor = cdColor.Color;
+                settings.MainFormColor = cdColor.Color.ToArgb();
             }
         }
 
         private void btScaleChange_Click(object sender, EventArgs e) {
-            mode = mode < 4 ? ++mode : 0;
+            mode = mode < 4 ? ((mode == 1) ? 3 : ++mode) : 0;   //AutoSize(2)を除外
             pbCarImage.SizeMode = (PictureBoxSizeMode)mode;
+        }
+
+        private void Form1_FormClosed(object sender, FormClosedEventArgs e) {
+            //設定ファイルのシリアル化
+            using(var writer = XmlWriter.Create("bColor.xml")) {
+                var serializer = new XmlSerializer(settings.GetType());
+                serializer.Serialize(writer, settings);
+            }
         }
     }
 }
