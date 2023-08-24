@@ -22,18 +22,18 @@ namespace CarReportSystem {
         
         //ステータスラベルのテキスト表示・非表示(引数なしはメッセージ非表示)
         private void statasLabelDisp(string msg = "") {
-            tsInfoText.Text = msg;
+            tsTimeDisp.Text = msg;
         }
 
         //追加ボタンがクリックされた時のイベントハンドラー
         private void btAddReport_Click(object sender, EventArgs e) {
             statasLabelDisp(); //ステータスラベルのテキスト非表示
             if (cbAuthor.Text.Equals("")) {
-                tsInfoText.Text = "記録者を入力してください";
+                tsTimeDisp.Text = "記録者を入力してください";
                 return;
             }
             else if (cbCarName.Text.Equals("")) {
-                tsInfoText.Text = "車名を入力してください";
+                tsTimeDisp.Text = "車名を入力してください";
             }
     
             var carReport = new CarReport() {
@@ -60,6 +60,8 @@ namespace CarReportSystem {
             dgvCarReports.CurrentCell = null;
             btModifyReport.Enabled = false; //マスクする
             btDeleteReport.Enabled = false;
+            btScaleChange.Enabled = false;
+            btImageDelete.Enabled = false;
 
         }
 
@@ -108,6 +110,8 @@ namespace CarReportSystem {
         private void btImageOpen_Click(object sender, EventArgs e) {
             if (ofdImageFileOpen.ShowDialog() == DialogResult.OK) {
                 pbCarImage.Image = Image.FromFile(ofdImageFileOpen.FileName);
+                btScaleChange.Enabled = true;
+                btImageDelete.Enabled = true;
             }
         }
 
@@ -128,9 +132,16 @@ namespace CarReportSystem {
         }
 
         private void Form1_Load(object sender, EventArgs e) {
+
+            tsinfoText.Text = "";  //情報表示テキストを初期化
+            tsTimeDisp.Text = DateTime.Now.ToString("HH時mm分ss秒");
+            tmTimeUpdate.Start();
+
             dgvCarReports.Columns[5].Visible = false; //画像項目非表示
             btModifyReport.Enabled = false; //マスクする
             btDeleteReport.Enabled = false;
+            btScaleChange.Enabled = false;
+            btImageDelete.Enabled = false;
 
             //設定ファイル逆シリアル化して背景に設定
             using (var reader = XmlReader.Create("bColor.xml")) {
@@ -178,6 +189,8 @@ namespace CarReportSystem {
 
         private void btImageDelete_Click(object sender, EventArgs e) {
             pbCarImage.Image = null;
+            btScaleChange.Enabled = false;
+            btImageDelete.Enabled = false;
         }
 
         //レコードの選択時
@@ -193,6 +206,8 @@ namespace CarReportSystem {
                 if (dgvCarReports.CurrentRow != null) {
                     btModifyReport.Enabled = true;
                     btDeleteReport.Enabled = true;
+                    btScaleChange.Enabled = true;
+                    btImageDelete.Enabled = true;
                 }
             }
         }
@@ -215,6 +230,10 @@ namespace CarReportSystem {
                 var serializer = new XmlSerializer(settings.GetType());
                 serializer.Serialize(writer, settings);
             }
+        }
+
+        private void tmTimeUpdate_Tick(object sender, EventArgs e) {
+            tsTimeDisp.Text = DateTime.Now.ToString("HH時mm分ss秒");
         }
     }
 }
