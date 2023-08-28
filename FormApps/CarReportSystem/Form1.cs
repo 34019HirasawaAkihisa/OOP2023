@@ -1,6 +1,8 @@
 ﻿using System;
 using System.ComponentModel;
 using System.Drawing;
+using System.IO;
+using System.Runtime.Serialization.Formatters.Binary;
 using System.Windows.Forms;
 using System.Xml;
 using System.Xml.Serialization;
@@ -12,14 +14,14 @@ namespace CarReportSystem {
 
         //設定情報保存用オブジェクト
         Settings settings = new Settings();
-        
+
         int mode = 0;
 
         public Form1() {
             InitializeComponent();
             dgvCarReports.DataSource = carReports;
         }
-        
+
         //ステータスラベルのテキスト表示・非表示(引数なしはメッセージ非表示)
         private void statasLabelDisp(string msg = "") {
             tsTimeDisp.Text = msg;
@@ -35,7 +37,7 @@ namespace CarReportSystem {
             else if (cbCarName.Text.Equals("")) {
                 tsTimeDisp.Text = "車名を入力してください";
             }
-    
+
             var carReport = new CarReport() {
                 Date = dtpDate.Value,
                 Author = cbAuthor.Text,
@@ -47,8 +49,7 @@ namespace CarReportSystem {
 
             carReports.Add(carReport);
 
-
-            if(cbAuthor.Items.Contains(cbAuthor.Text) == false) {
+            if (cbAuthor.Items.Contains(cbAuthor.Text) == false) {
                 cbAuthor.Items.Add(cbAuthor.Text);
             }
             if (cbCarName.Items.Contains(cbCarName.Text) == false) {
@@ -121,7 +122,7 @@ namespace CarReportSystem {
             for (int i = src.Count - 1; i >= 0; i--) {
                 dgvCarReports.Rows.RemoveAt(src[i].Index);
             }
-            if(dgvCarReports.RowCount == 0) {
+            if (dgvCarReports.RowCount == 0) {
                 btModifyReport.Enabled = false; //マスクする
                 btDeleteReport.Enabled = false;
             }
@@ -143,15 +144,19 @@ namespace CarReportSystem {
             btScaleChange.Enabled = false;
             btImageDelete.Enabled = false;
 
-            //設定ファイル逆シリアル化して背景に設定
-            using (var reader = XmlReader.Create("bColor.xml")) {
-                var serializer = new XmlSerializer(typeof(Settings));
-                settings = serializer.Deserialize(reader) as Settings;
-                BackColor = Color.FromArgb(settings.MainFormColor);
-            } 
+            try {
+                //設定ファイル逆シリアル化して背景に設定
+                using (var reader = XmlReader.Create("bColor.xml")) {
+                    var serializer = new XmlSerializer(typeof(Settings));
+                    settings = serializer.Deserialize(reader) as Settings;
+                    BackColor = Color.FromArgb(settings.MainFormColor);
+                }
+            }
+            catch (Exception ex) {
+                MessageBox.Show(ex.Message);
+            }
         }
 
-  
 
         //修正ボタンのイベントハンドラ
         private void btModifyReport_Click(object sender, EventArgs e) {
@@ -226,7 +231,7 @@ namespace CarReportSystem {
 
         private void Form1_FormClosed(object sender, FormClosedEventArgs e) {
             //設定ファイルのシリアル化
-            using(var writer = XmlWriter.Create("bColor.xml")) {
+            using (var writer = XmlWriter.Create("bColor.xml")) {
                 var serializer = new XmlSerializer(settings.GetType());
                 serializer.Serialize(writer, settings);
             }
@@ -237,15 +242,45 @@ namespace CarReportSystem {
         }
 
         private void 保存SToolStripMenuItem_Click(object sender, EventArgs e) {
-            if(sfdCarRepoSave.ShowDialog() == DialogResult.OK) {
-
+            if (sfdCarRepoSave.ShowDialog() == DialogResult.OK) {
+                try {
+                    //バイナリ形式でシリアル化
+                    var bf = new BinaryFormatter();
+                    using (FileStream fs = File.Open(sfdCarRepoSave.FileName, FileMode.Create)) {
+                        bf.Serialize(fs, carReports);
+                    }
+                }
+                catch (Exception ex) {
+                    MessageBox.Show(ex.Message);
+                }
             }
         }
 
         private void 開くOToolStripMenuItem_Click(object sender, EventArgs e) {
-            if(ofdCarRepoOpen.ShowDialog() == DialogResult.OK) {
-
+            if (ofdCarRepoOpen.ShowDialog() == DialogResult.OK) {
+                try {
+                    //逆シリアル化
+                    var bf = new BinaryFormatter();
+                    using (FileStream fs = File.Open(ofdCarRepoOpen.FileName, FileMode.Open, FileAccess.Read)) {
+                        carReports = (BindingList<CarReport>)bf.Deserialize(fs);
+                        dgvCarReports.DataSource = null;
+                        dgvCarReports.DataSource = carReports;
+                        foreach (var item in carReports) {
+                            if (cbAuthor.Items.Contains(item.Author) == false) {
+                                cbAuthor.Items.Add(item.Author);
+                            }
+                            if (cbCarName.Items.Contains(item.CarName) == false) {
+                                cbCarName.Items.Add(item.CarName);
+                            }
+                        }
+                        dgvCarReports.ClearSelection();
+                    }
+                }
+                catch (Exception ex) {
+                    MessageBox.Show(ex.Message);
+                }
             }
         }
     }
 }
+
