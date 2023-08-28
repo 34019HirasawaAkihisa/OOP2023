@@ -49,12 +49,8 @@ namespace CarReportSystem {
 
             carReports.Add(carReport);
 
-            if (cbAuthor.Items.Contains(cbAuthor.Text) == false) {
-                cbAuthor.Items.Add(cbAuthor.Text);
-            }
-            if (cbCarName.Items.Contains(cbCarName.Text) == false) {
-                cbCarName.Items.Add(cbCarName.Text);
-            }
+            setCbAuthor(cbAuthor.Text);
+            setCbCarName(cbCarName.Text);
 
             Clear();
 
@@ -64,6 +60,18 @@ namespace CarReportSystem {
             btScaleChange.Enabled = false;
             btImageDelete.Enabled = false;
 
+        }
+        private void setCbCarName(string author) {
+            if (cbCarName.Items.Contains(author) == false) {
+                cbCarName.Items.Add(author);
+
+            }
+        }
+
+        private void setCbAuthor(string carname) {
+            if (cbAuthor.Items.Contains(carname) == false) {
+                cbAuthor.Items.Add(carname);
+            }
         }
 
         //ラジオボタンで選択されているメーカーを返却
@@ -265,13 +273,15 @@ namespace CarReportSystem {
                         carReports = (BindingList<CarReport>)bf.Deserialize(fs);
                         dgvCarReports.DataSource = null;
                         dgvCarReports.DataSource = carReports;
+
+                        cbAuthor.Items.Clear();
+                        cbCarName.Items.Clear();
+                        Clear();
+                        
+
                         foreach (var item in carReports) {
-                            if (cbAuthor.Items.Contains(item.Author) == false) {
-                                cbAuthor.Items.Add(item.Author);
-                            }
-                            if (cbCarName.Items.Contains(item.CarName) == false) {
-                                cbCarName.Items.Add(item.CarName);
-                            }
+                                setCbAuthor(item.Author);
+                                setCbCarName(item.CarName);
                         }
                         dgvCarReports.ClearSelection();
                         dgvCarReports.Columns[5].Visible = false;
