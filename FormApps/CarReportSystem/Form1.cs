@@ -274,6 +274,7 @@ namespace CarReportSystem {
                             }
                         }
                         dgvCarReports.ClearSelection();
+                        dgvCarReports.Columns[5].Visible = false;
                     }
                 }
                 catch (Exception ex) {
