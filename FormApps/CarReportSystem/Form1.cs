@@ -13,7 +13,7 @@ namespace CarReportSystem {
         BindingList<CarReport> carReports = new BindingList<CarReport>();
 
         //設定情報保存用オブジェクト
-        Settings settings = new Settings();
+        Settings settings = Settings.getInstance();
 
         int mode = 0;
 
@@ -141,6 +141,7 @@ namespace CarReportSystem {
         }
 
         private void Form1_Load(object sender, EventArgs e) {
+            
 
             tsinfoText.Text = "";  //情報表示テキストを初期化
             tsTimeDisp.Text = DateTime.Now.ToString("HH時mm分ss秒");
@@ -295,6 +296,19 @@ namespace CarReportSystem {
                     btImageDelete.Enabled = true;
                 }
             }
+        }
+
+        private void carReportTableBindingNavigatorSaveItem_Click(object sender, EventArgs e) {
+            this.Validate();
+            this.carReportTableBindingSource.EndEdit();
+            this.tableAdapterManager.UpdateAll(this.infosys202305DataSet);
+
+        }
+
+        //接続ボタンのイベントハンドラ
+        private void btConnection_Click(object sender, EventArgs e) {
+            // TODO: このコード行はデータを 'infosys202305DataSet.CarReportTable' テーブルに読み込みます。必要に応じて移動、または削除をしてください。
+            this.carReportTableTableAdapter.Fill(this.infosys202305DataSet.CarReportTable);
         }
     }
 }
