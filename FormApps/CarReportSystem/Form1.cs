@@ -139,7 +139,12 @@ namespace CarReportSystem {
 
         //削除ボタンのイベントハンドラ
         private void btDeleteReport_Click(object sender, EventArgs e) {
-            DataGridViewSelectedRowCollection src = dgvCarReports.SelectedRows;
+
+            dgvCarReports.Rows.RemoveAt(dgvCarReports.CurrentRow.Index);
+            this.carReportTableTableAdapter.Update(infosys202305DataSet.CarReportTable);
+            Clear();
+
+            /*DataGridViewSelectedRowCollection src = dgvCarReports.SelectedRows;
             for (int i = src.Count - 1; i >= 0; i--) {
                 dgvCarReports.Rows.RemoveAt(src[i].Index);
             }
@@ -150,7 +155,7 @@ namespace CarReportSystem {
 
             dgvCarReports.CurrentCell = null;
             btModifyReport.Enabled = false; //マスクする
-            btDeleteReport.Enabled = false;
+            btDeleteReport.Enabled = false;*/
         }
 
         private void Form1_Load(object sender, EventArgs e) {
