@@ -1,5 +1,6 @@
 ﻿using System;
 using System.ComponentModel;
+using System.Data;
 using System.Drawing;
 using System.IO;
 using System.Runtime.Serialization.Formatters.Binary;
@@ -38,16 +39,28 @@ namespace CarReportSystem {
                 tsTimeDisp.Text = "車名を入力してください";
             }
 
-            var carReport = new CarReport() {
-                Date = dtpDate.Value,
-                Author = cbAuthor.Text,
-                CarName = cbCarName.Text,
-                Report = tbReport.Text,
-                Maker = getMakerGroup(),
-                CarImage = pbCarImage.Image,
-            };
+            DataRow newRow = infosys202305DataSet.CarReportTable.NewRow();
 
-            carReports.Add(carReport);
+            newRow[1] = dtpDate.Value;
+            newRow[2] = cbAuthor.Text;
+            newRow[3] = getMakerGroup();
+            newRow[4] = cbCarName.Text;
+            newRow[5] = tbReport.Text;
+            newRow[6] = ImageToByteArray(pbCarImage.Image);
+
+            infosys202305DataSet.CarReportTable.Rows.Add(newRow);
+            this.carReportTableTableAdapter.Update(infosys202305DataSet.CarReportTable);
+
+            //var carReport = new CarReport() {
+            //    Date = dtpDate.Value,
+            //    Author = cbAuthor.Text,
+            //    CarName = cbCarName.Text,
+            //    Report = tbReport.Text,
+            //    Maker = getMakerGroup(),
+            //    CarImage = pbCarImage.Image,
+            //};
+
+            //carReports.Add(carReport);
 
             setCbAuthor(cbAuthor.Text);
             setCbCarName(cbCarName.Text);
@@ -141,7 +154,7 @@ namespace CarReportSystem {
         }
 
         private void Form1_Load(object sender, EventArgs e) {
-            
+
 
             tsinfoText.Text = "";  //情報表示テキストを初期化
             tsTimeDisp.Text = DateTime.Now.ToString("HH時mm分ss秒");
@@ -270,11 +283,11 @@ namespace CarReportSystem {
                         cbAuthor.Items.Clear();
                         cbCarName.Items.Clear();
                         Clear();
-                        
+
 
                         foreach (var item in carReports) {
-                                setCbAuthor(item.Author);
-                                setCbCarName(item.CarName);
+                            setCbAuthor(item.Author);
+                            setCbCarName(item.CarName);
                         }
                         dgvCarReports.ClearSelection();
                         dgvCarReports.Columns[5].Visible = false;
@@ -295,7 +308,7 @@ namespace CarReportSystem {
                 cbCarName.Text = dgvCarReports.CurrentRow.Cells[4].Value.ToString();
                 tbReport.Text = dgvCarReports.CurrentRow.Cells[5].Value.ToString();
 
-                if (!dgvCarReports.CurrentRow.Cells[6].Value.Equals(DBNull.Value)){
+                if (!dgvCarReports.CurrentRow.Cells[6].Value.Equals(DBNull.Value)) {
                     pbCarImage.Image = ByteArrayToImage((byte[])dgvCarReports.CurrentRow.Cells[6].Value);
                 }
                 else {
@@ -338,7 +351,6 @@ namespace CarReportSystem {
             this.carReportTableTableAdapter.Fill(this.infosys202305DataSet.CarReportTable);
             dgvCarReports.ClearSelection(); //選択解除
         }
-
     }
 }
 
