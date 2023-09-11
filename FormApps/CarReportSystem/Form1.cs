@@ -302,6 +302,15 @@ namespace CarReportSystem {
                     MessageBox.Show(ex.Message);
                 }
             }
+
+            // TODO: このコード行はデータを 'infosys202305DataSet.CarReportTable' テーブルに読み込みます。必要に応じて移動、または削除をしてください。
+            this.carReportTableTableAdapter.Fill(this.infosys202305DataSet.CarReportTable);
+            dgvCarReports.ClearSelection(); //選択解除
+
+            foreach (var carReport in infosys202305DataSet.CarReportTable) {
+                setCbAuthor(carReport.Author);
+                setCbCarName(carReport.CarName);
+            }
         }
 
         //レコード時の選択
@@ -354,8 +363,7 @@ namespace CarReportSystem {
 
         }
 
-        //接続ボタンのイベントハンドラ
-        private void btConnection_Click(object sender, EventArgs e) {
+        private void dbConnection() {
             // TODO: このコード行はデータを 'infosys202305DataSet.CarReportTable' テーブルに読み込みます。必要に応じて移動、または削除をしてください。
             this.carReportTableTableAdapter.Fill(this.infosys202305DataSet.CarReportTable);
             dgvCarReports.ClearSelection(); //選択解除
@@ -364,6 +372,18 @@ namespace CarReportSystem {
                 setCbAuthor(carReport.Author);
                 setCbCarName(carReport.CarName);
             }
+        }
+
+        private void 接続NToolStripMenuItem_Click_1(object sender, EventArgs e) {
+            dbConnection();
+        }
+
+        private void btAuthorSerach_Click(object sender, EventArgs e) {
+            carReportTableTableAdapter.FillByAuthor(this.infosys202305DataSet.CarReportTable, tbAuthor.Text);
+        }
+
+        private void btCarNameSerach_Click(object sender, EventArgs e) {
+            carReportTableTableAdapter.FillByCarName(this.infosys202305DataSet.CarReportTable, tbCarName.Text);
         }
     }
 }
