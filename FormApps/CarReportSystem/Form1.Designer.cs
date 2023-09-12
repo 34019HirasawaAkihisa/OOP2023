@@ -84,13 +84,16 @@ namespace CarReportSystem {
             this.btAuthorSerach = new System.Windows.Forms.Button();
             this.tbCarName = new System.Windows.Forms.TextBox();
             this.tbAuthor = new System.Windows.Forms.TextBox();
+            this.label10 = new System.Windows.Forms.Label();
             this.label9 = new System.Windows.Forms.Label();
             this.label8 = new System.Windows.Forms.Label();
+            this.dtpDateSerachS = new System.Windows.Forms.DateTimePicker();
             this.carReportTableTableAdapter = new CarReportSystem.infosys202305DataSetTableAdapters.CarReportTableTableAdapter();
             this.tableAdapterManager = new CarReportSystem.infosys202305DataSetTableAdapters.TableAdapterManager();
-            this.label10 = new System.Windows.Forms.Label();
-            this.btDataSerach = new System.Windows.Forms.Button();
-            this.button1 = new System.Windows.Forms.Button();
+            this.btDateSerach = new System.Windows.Forms.Button();
+            this.btReset = new System.Windows.Forms.Button();
+            this.dtpDateSerachE = new System.Windows.Forms.DateTimePicker();
+            this.label11 = new System.Windows.Forms.Label();
             this.gbMaker.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dgvCarReports)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.carReportTableBindingSource)).BeginInit();
@@ -113,7 +116,7 @@ namespace CarReportSystem {
             // 
             // dtpDate
             // 
-            this.dtpDate.Location = new System.Drawing.Point(47, 81);
+            this.dtpDate.Location = new System.Drawing.Point(89, 83);
             this.dtpDate.Name = "dtpDate";
             this.dtpDate.Size = new System.Drawing.Size(124, 19);
             this.dtpDate.TabIndex = 0;
@@ -591,8 +594,9 @@ namespace CarReportSystem {
             // 
             // groupBox1
             // 
-            this.groupBox1.Controls.Add(this.button1);
-            this.groupBox1.Controls.Add(this.btDataSerach);
+            this.groupBox1.Controls.Add(this.label11);
+            this.groupBox1.Controls.Add(this.btReset);
+            this.groupBox1.Controls.Add(this.btDateSerach);
             this.groupBox1.Controls.Add(this.btCarNameSerach);
             this.groupBox1.Controls.Add(this.btAuthorSerach);
             this.groupBox1.Controls.Add(this.tbCarName);
@@ -600,10 +604,11 @@ namespace CarReportSystem {
             this.groupBox1.Controls.Add(this.label10);
             this.groupBox1.Controls.Add(this.label9);
             this.groupBox1.Controls.Add(this.label8);
-            this.groupBox1.Controls.Add(this.dtpDate);
+            this.groupBox1.Controls.Add(this.dtpDateSerachE);
+            this.groupBox1.Controls.Add(this.dtpDateSerachS);
             this.groupBox1.Location = new System.Drawing.Point(729, 399);
             this.groupBox1.Name = "groupBox1";
-            this.groupBox1.Size = new System.Drawing.Size(269, 148);
+            this.groupBox1.Size = new System.Drawing.Size(269, 208);
             this.groupBox1.TabIndex = 15;
             this.groupBox1.TabStop = false;
             this.groupBox1.Text = "検索";
@@ -642,6 +647,15 @@ namespace CarReportSystem {
             this.tbAuthor.Size = new System.Drawing.Size(124, 19);
             this.tbAuthor.TabIndex = 1;
             // 
+            // label10
+            // 
+            this.label10.AutoSize = true;
+            this.label10.Location = new System.Drawing.Point(12, 86);
+            this.label10.Name = "label10";
+            this.label10.Size = new System.Drawing.Size(29, 12);
+            this.label10.TabIndex = 0;
+            this.label10.Text = "日付";
+            // 
             // label9
             // 
             this.label9.AutoSize = true;
@@ -660,6 +674,13 @@ namespace CarReportSystem {
             this.label8.TabIndex = 0;
             this.label8.Text = "記録者";
             // 
+            // dtpDateSerachS
+            // 
+            this.dtpDateSerachS.Location = new System.Drawing.Point(48, 81);
+            this.dtpDateSerachS.Name = "dtpDateSerachS";
+            this.dtpDateSerachS.Size = new System.Drawing.Size(124, 19);
+            this.dtpDateSerachS.TabIndex = 0;
+            // 
             // carReportTableTableAdapter
             // 
             this.carReportTableTableAdapter.ClearBeforeFill = true;
@@ -670,34 +691,41 @@ namespace CarReportSystem {
             this.tableAdapterManager.CarReportTableTableAdapter = this.carReportTableTableAdapter;
             this.tableAdapterManager.UpdateOrder = CarReportSystem.infosys202305DataSetTableAdapters.TableAdapterManager.UpdateOrderOption.InsertUpdateDelete;
             // 
-            // label10
+            // btDateSerach
             // 
-            this.label10.AutoSize = true;
-            this.label10.Location = new System.Drawing.Point(12, 86);
-            this.label10.Name = "label10";
-            this.label10.Size = new System.Drawing.Size(29, 12);
-            this.label10.TabIndex = 0;
-            this.label10.Text = "日付";
+            this.btDateSerach.Location = new System.Drawing.Point(184, 137);
+            this.btDateSerach.Name = "btDateSerach";
+            this.btDateSerach.Size = new System.Drawing.Size(85, 23);
+            this.btDateSerach.TabIndex = 3;
+            this.btDateSerach.Text = "日付で検索";
+            this.btDateSerach.UseVisualStyleBackColor = true;
+            this.btDateSerach.Click += new System.EventHandler(this.btDateSerach_Click);
             // 
-            // btDataSerach
+            // btReset
             // 
-            this.btDataSerach.Location = new System.Drawing.Point(177, 75);
-            this.btDataSerach.Name = "btDataSerach";
-            this.btDataSerach.Size = new System.Drawing.Size(92, 25);
-            this.btDataSerach.TabIndex = 2;
-            this.btDataSerach.Text = "日付で検索";
-            this.btDataSerach.UseVisualStyleBackColor = true;
-            this.btDataSerach.Click += new System.EventHandler(this.btCarNameSerach_Click);
+            this.btReset.Location = new System.Drawing.Point(188, 179);
+            this.btReset.Name = "btReset";
+            this.btReset.Size = new System.Drawing.Size(75, 23);
+            this.btReset.TabIndex = 4;
+            this.btReset.Text = "リセット";
+            this.btReset.UseVisualStyleBackColor = true;
+            this.btReset.Click += new System.EventHandler(this.btReset_Click);
             // 
-            // button1
+            // dtpDateSerachE
             // 
-            this.button1.Location = new System.Drawing.Point(177, 117);
-            this.button1.Name = "button1";
-            this.button1.Size = new System.Drawing.Size(92, 25);
-            this.button1.TabIndex = 2;
-            this.button1.Text = "リセット";
-            this.button1.UseVisualStyleBackColor = true;
-            this.button1.Click += new System.EventHandler(this.btCarNameSerach_Click);
+            this.dtpDateSerachE.Location = new System.Drawing.Point(48, 141);
+            this.dtpDateSerachE.Name = "dtpDateSerachE";
+            this.dtpDateSerachE.Size = new System.Drawing.Size(124, 19);
+            this.dtpDateSerachE.TabIndex = 0;
+            // 
+            // label11
+            // 
+            this.label11.AutoSize = true;
+            this.label11.Location = new System.Drawing.Point(101, 112);
+            this.label11.Name = "label11";
+            this.label11.Size = new System.Drawing.Size(17, 12);
+            this.label11.TabIndex = 5;
+            this.label11.Text = "～";
             // 
             // Form1
             // 
@@ -714,6 +742,7 @@ namespace CarReportSystem {
             this.Controls.Add(this.pbCarImage);
             this.Controls.Add(this.btImageDelete);
             this.Controls.Add(this.btImageOpen);
+            this.Controls.Add(this.dtpDate);
             this.Controls.Add(this.dgvCarReports);
             this.Controls.Add(this.tbReport);
             this.Controls.Add(this.label6);
@@ -815,9 +844,12 @@ namespace CarReportSystem {
         private System.Windows.Forms.TextBox tbAuthor;
         private System.Windows.Forms.Label label9;
         private System.Windows.Forms.Label label8;
-        private System.Windows.Forms.Button button1;
-        private System.Windows.Forms.Button btDataSerach;
         private System.Windows.Forms.Label label10;
+        private System.Windows.Forms.DateTimePicker dtpDateSerachS;
+        private System.Windows.Forms.Button btDateSerach;
+        private System.Windows.Forms.Button btReset;
+        private System.Windows.Forms.Label label11;
+        private System.Windows.Forms.DateTimePicker dtpDateSerachE;
     }
 }
 

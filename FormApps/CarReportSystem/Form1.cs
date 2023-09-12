@@ -159,7 +159,7 @@ namespace CarReportSystem {
         }
 
         private void Form1_Load(object sender, EventArgs e) {
-
+            dgvCarReports.Columns[0].Visible = false;
 
             tsinfoText.Text = "";  //情報表示テキストを初期化
             tsTimeDisp.Text = DateTime.Now.ToString("HH時mm分ss秒");
@@ -385,6 +385,13 @@ namespace CarReportSystem {
         private void btCarNameSerach_Click(object sender, EventArgs e) {
             carReportTableTableAdapter.FillByCarName(this.infosys202305DataSet.CarReportTable, tbCarName.Text);
         }
+
+        private void btDateSerach_Click(object sender, EventArgs e) {
+            carReportTableTableAdapter.FillByDateToDate(this.infosys202305DataSet.CarReportTable, dtpDateSerachS.Text,dtpDateSerachE.Text);
+        }
+
+        private void btReset_Click(object sender, EventArgs e) {
+            carReportTableTableAdapter.Fill(this.infosys202305DataSet.CarReportTable);
+        }
     }
 }
-
