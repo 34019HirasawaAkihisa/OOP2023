@@ -148,10 +148,10 @@ namespace SampleEntityFramework {
 
         private static void Exercise1_5() {
             using (var db = new BooksDbContext()) {
-                var oauthor = db.Books.OrderByDescending(s => s.Author.Birthday).ToList();
+                var author = db.Books.OrderByDescending(s => s.Author.Birthday).ToList();
 
-                foreach (var item in oauthor) {
-                    Console.WriteLine($"{item.Title}{item.PublishedYear}");
+                foreach (var item in author) {
+                    Console.WriteLine($"{item.Author.Name}:{item.Title}:{item.PublishedYear}:{item.Author.Birthday.Year}");
                 }
             }
         }
