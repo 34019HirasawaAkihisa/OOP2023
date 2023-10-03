@@ -12,7 +12,8 @@ using System.Xml.Linq;
 
 namespace RssReader {
     public partial class Form1 : Form {
-        List<ItemData> itemData = new List<ItemData>();
+        List<ItemData> itemData = new List<ItemData>();      
+        
         public Form1() {
             InitializeComponent();
         }
@@ -45,6 +46,16 @@ namespace RssReader {
 
         private void gf_Click(object sender, EventArgs e) {
             wbBrowser.GoForward();
+        }
+
+        private void uTitle_Click(object sender, EventArgs e) {
+            lbRssTitle.SelectedIndex -= 1;
+            wbBrowser.Navigate(itemData[lbRssTitle.SelectedIndex].Link);
+        }
+
+        private void dTitle_Click(object sender, EventArgs e) {
+            lbRssTitle.SelectedIndex += 1;
+            wbBrowser.Navigate(itemData[lbRssTitle.SelectedIndex].Link);
         }
     }
 }

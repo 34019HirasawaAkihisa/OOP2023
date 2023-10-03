@@ -30,6 +30,8 @@ namespace RssReader {
             this.wbBrowser = new System.Windows.Forms.WebBrowser();
             this.bk = new System.Windows.Forms.Button();
             this.gf = new System.Windows.Forms.Button();
+            this.uTitle = new System.Windows.Forms.Button();
+            this.dTitle = new System.Windows.Forms.Button();
             this.SuspendLayout();
             // 
             // btGet
@@ -88,11 +90,33 @@ namespace RssReader {
             this.gf.UseVisualStyleBackColor = true;
             this.gf.Click += new System.EventHandler(this.gf_Click);
             // 
+            // uTitle
+            // 
+            this.uTitle.Location = new System.Drawing.Point(1140, 41);
+            this.uTitle.Name = "uTitle";
+            this.uTitle.Size = new System.Drawing.Size(75, 23);
+            this.uTitle.TabIndex = 6;
+            this.uTitle.Text = "上の記事へ";
+            this.uTitle.UseVisualStyleBackColor = true;
+            this.uTitle.Click += new System.EventHandler(this.uTitle_Click);
+            // 
+            // dTitle
+            // 
+            this.dTitle.Location = new System.Drawing.Point(1140, 70);
+            this.dTitle.Name = "dTitle";
+            this.dTitle.Size = new System.Drawing.Size(75, 23);
+            this.dTitle.TabIndex = 7;
+            this.dTitle.Text = "下の記事へ";
+            this.dTitle.UseVisualStyleBackColor = true;
+            this.dTitle.Click += new System.EventHandler(this.dTitle_Click);
+            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(1253, 838);
+            this.Controls.Add(this.dTitle);
+            this.Controls.Add(this.uTitle);
             this.Controls.Add(this.gf);
             this.Controls.Add(this.bk);
             this.Controls.Add(this.wbBrowser);
@@ -114,6 +138,8 @@ namespace RssReader {
         private System.Windows.Forms.WebBrowser wbBrowser;
         private System.Windows.Forms.Button bk;
         private System.Windows.Forms.Button gf;
+        private System.Windows.Forms.Button uTitle;
+        private System.Windows.Forms.Button dTitle;
     }
 }
 
