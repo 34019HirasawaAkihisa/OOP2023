@@ -38,5 +38,13 @@ namespace RssReader {
             var url = lbRssTitle.SelectedIndex;
             wbBrowser.Navigate(itemData[url].Link);
         }
+
+        private void bk_Click(object sender, EventArgs e) {
+            wbBrowser.GoBack();
+        }
+
+        private void gf_Click(object sender, EventArgs e) {
+            wbBrowser.GoForward();
+        }
     }
 }
