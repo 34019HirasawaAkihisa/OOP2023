@@ -32,13 +32,14 @@ namespace RssReader {
             this.gf = new System.Windows.Forms.Button();
             this.uTitle = new System.Windows.Forms.Button();
             this.dTitle = new System.Windows.Forms.Button();
+            this.btDelete = new System.Windows.Forms.Button();
             this.SuspendLayout();
             // 
             // btGet
             // 
             this.btGet.Location = new System.Drawing.Point(1139, 12);
             this.btGet.Name = "btGet";
-            this.btGet.Size = new System.Drawing.Size(75, 23);
+            this.btGet.Size = new System.Drawing.Size(40, 30);
             this.btGet.TabIndex = 0;
             this.btGet.Text = "取得";
             this.btGet.UseVisualStyleBackColor = true;
@@ -46,18 +47,20 @@ namespace RssReader {
             // 
             // tbUrl
             // 
+            this.tbUrl.Font = new System.Drawing.Font("MS UI Gothic", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(128)));
             this.tbUrl.Location = new System.Drawing.Point(90, 13);
             this.tbUrl.Name = "tbUrl";
-            this.tbUrl.Size = new System.Drawing.Size(1043, 19);
+            this.tbUrl.Size = new System.Drawing.Size(1043, 26);
             this.tbUrl.TabIndex = 1;
             // 
             // lbRssTitle
             // 
+            this.lbRssTitle.Font = new System.Drawing.Font("MS UI Gothic", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(128)));
             this.lbRssTitle.FormattingEnabled = true;
-            this.lbRssTitle.ItemHeight = 12;
-            this.lbRssTitle.Location = new System.Drawing.Point(29, 41);
+            this.lbRssTitle.ItemHeight = 19;
+            this.lbRssTitle.Location = new System.Drawing.Point(167, 41);
             this.lbRssTitle.Name = "lbRssTitle";
-            this.lbRssTitle.Size = new System.Drawing.Size(1104, 100);
+            this.lbRssTitle.Size = new System.Drawing.Size(966, 99);
             this.lbRssTitle.TabIndex = 2;
             this.lbRssTitle.Click += new System.EventHandler(this.lbRssTitle_Click);
             // 
@@ -67,14 +70,14 @@ namespace RssReader {
             this.wbBrowser.MinimumSize = new System.Drawing.Size(20, 20);
             this.wbBrowser.Name = "wbBrowser";
             this.wbBrowser.ScriptErrorsSuppressed = true;
-            this.wbBrowser.Size = new System.Drawing.Size(1185, 680);
+            this.wbBrowser.Size = new System.Drawing.Size(1185, 651);
             this.wbBrowser.TabIndex = 3;
             // 
             // bk
             // 
-            this.bk.Location = new System.Drawing.Point(29, 9);
+            this.bk.Location = new System.Drawing.Point(29, 13);
             this.bk.Name = "bk";
-            this.bk.Size = new System.Drawing.Size(24, 24);
+            this.bk.Size = new System.Drawing.Size(33, 27);
             this.bk.TabIndex = 4;
             this.bk.Text = "←";
             this.bk.UseVisualStyleBackColor = true;
@@ -82,9 +85,9 @@ namespace RssReader {
             // 
             // gf
             // 
-            this.gf.Location = new System.Drawing.Point(59, 10);
+            this.gf.Location = new System.Drawing.Point(59, 13);
             this.gf.Name = "gf";
-            this.gf.Size = new System.Drawing.Size(25, 23);
+            this.gf.Size = new System.Drawing.Size(34, 27);
             this.gf.TabIndex = 5;
             this.gf.Text = "→";
             this.gf.UseVisualStyleBackColor = true;
@@ -102,7 +105,7 @@ namespace RssReader {
             // 
             // dTitle
             // 
-            this.dTitle.Location = new System.Drawing.Point(1140, 70);
+            this.dTitle.Location = new System.Drawing.Point(1140, 61);
             this.dTitle.Name = "dTitle";
             this.dTitle.Size = new System.Drawing.Size(75, 23);
             this.dTitle.TabIndex = 7;
@@ -110,11 +113,22 @@ namespace RssReader {
             this.dTitle.UseVisualStyleBackColor = true;
             this.dTitle.Click += new System.EventHandler(this.dTitle_Click);
             // 
+            // btDelete
+            // 
+            this.btDelete.Location = new System.Drawing.Point(1176, 12);
+            this.btDelete.Name = "btDelete";
+            this.btDelete.Size = new System.Drawing.Size(39, 30);
+            this.btDelete.TabIndex = 8;
+            this.btDelete.Text = "削除";
+            this.btDelete.UseVisualStyleBackColor = true;
+            this.btDelete.Click += new System.EventHandler(this.btDelete_Click);
+            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(1253, 838);
+            this.Controls.Add(this.btDelete);
             this.Controls.Add(this.dTitle);
             this.Controls.Add(this.uTitle);
             this.Controls.Add(this.gf);
@@ -140,6 +154,7 @@ namespace RssReader {
         private System.Windows.Forms.Button gf;
         private System.Windows.Forms.Button uTitle;
         private System.Windows.Forms.Button dTitle;
+        private System.Windows.Forms.Button btDelete;
     }
 }
 

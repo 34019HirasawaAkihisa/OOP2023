@@ -12,13 +12,18 @@ using System.Xml.Linq;
 
 namespace RssReader {
     public partial class Form1 : Form {
-        List<ItemData> itemData = new List<ItemData>();      
-        
+        List<ItemData> itemData = new List<ItemData>();
+
         public Form1() {
             InitializeComponent();
         }
 
         private void btGet_Click(object sender, EventArgs e) {
+            if (tbUrl.Text == "")
+                return;
+
+            lbRssTitle.Items.Clear();
+
             using (var wc = new WebClient()) {
                 var url = wc.OpenRead(tbUrl.Text);
                 XDocument xdoc = XDocument.Load(url);
@@ -56,6 +61,10 @@ namespace RssReader {
         private void dTitle_Click(object sender, EventArgs e) {
             lbRssTitle.SelectedIndex += 1;
             wbBrowser.Navigate(itemData[lbRssTitle.SelectedIndex].Link);
+        }
+
+        private void btDelete_Click(object sender, EventArgs e) {
+            tbUrl.ResetText();
         }
     }
 }
