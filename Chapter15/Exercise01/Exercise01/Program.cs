@@ -79,9 +79,19 @@ namespace Exercise01 {
         }
 
         private static void Exercise1_7() {
+
         }
 
         private static void Exercise1_8() {
+            var groups = Library.Categories.GroupJoin(Library.Books,
+                                 c => c.Id,
+                                 b => b.CategoryId,
+                                 (c, books) => new { Category = c.Name, Count = books.Count()});
+            foreach (var item in groups) {
+                if(item.Count >= 4) {
+                    Console.WriteLine(item.Category);
+                }
+            }
         }
     }
 }
