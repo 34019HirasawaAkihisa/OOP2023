@@ -1,0 +1,56 @@
+﻿<Window x:Class="colorChecker.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:colorChecker"
+        mc:Ignorable="d"
+        Title="MainWindow" Height="300
+        " Width="700">
+    <Grid Height="256" VerticalAlignment="Top">
+        <Grid HorizontalAlignment="Left" Margin="241,0,0,0" Width="259">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="46*"/>
+                <ColumnDefinition Width="174*"/>
+                <ColumnDefinition Width="39*"/>
+            </Grid.ColumnDefinitions>
+            <Grid.RowDefinitions>
+                <RowDefinition Height="65*"/>
+                <RowDefinition Height="65*"/>
+                <RowDefinition Height="65*"/>
+                <RowDefinition Height="96*"/>
+            </Grid.RowDefinitions>
+            <TextBlock HorizontalAlignment="Right" TextWrapping="Wrap" Text="R" VerticalAlignment="Bottom" Height="30" Width="17" FontSize="20"/>
+            <TextBlock HorizontalAlignment="Right" Grid.Row="1" TextWrapping="Wrap" Text="G" VerticalAlignment="Bottom" Height="30" Width="17" FontSize="20"/>
+            <TextBlock HorizontalAlignment="Right" Grid.Row="2" TextWrapping="Wrap" Text="B" VerticalAlignment="Bottom" Height="30" Width="17" FontSize="20"/>
+            <TextBox Grid.Row="0" Grid.Column="2"  Text="{Binding ElementName=sliderRed,Path=Value, StringFormat={}{0:N0},Mode=TwoWay}" VerticalAlignment="Bottom" Height="30" Margin="0,0,3,0" VerticalContentAlignment="Center" FontSize="16" />
+            <TextBox Grid.Row="1" Grid.Column="2"  Text="{Binding ElementName=sliderGreen,Path=Value, StringFormat={}{0:N0},Mode=TwoWay}" VerticalAlignment="Bottom" Height="31" VerticalContentAlignment="Center" Margin="0,0,3,0" FontSize="16"/>
+            <TextBox Grid.Row="2" Grid.Column="2"  Text="{Binding ElementName=sliderBlue,Path=Value, StringFormat={}{0:N0},Mode=TwoWay}" VerticalAlignment="Bottom" Height="29" Margin="0,0,3,0" VerticalContentAlignment="Center" FontSize="16"/>
+            <Slider x:Name="sliderRed" Grid.Column="1" VerticalAlignment="Bottom" Height="30" TickPlacement="TopLeft" Maximum="255" ValueChanged="slider_ValueChanged"/>
+            <Slider x:Name="sliderGreen" Grid.Column="1" Grid.Row="1" VerticalAlignment="Bottom" Height="31" TickPlacement="TopLeft" Maximum="255" ValueChanged="slider_ValueChanged"/>
+            <Slider x:Name="sliderBlue" Grid.Column="1" Grid.Row="2" VerticalAlignment="Bottom" Margin="0" Height="29" TickPlacement="TopLeft" Maximum="255" ValueChanged="slider_ValueChanged"/>
+            <ComboBox x:Name="colorC" ItemsSource="{Binding}" SelectedValue="{Binding Color}" Grid.Column="1" HorizontalAlignment="Center" Margin="0,28,10,27" Grid.Row="3" Width="164" SelectionChanged="ComboBox_SelectionChanged">
+                <ComboBox.ItemTemplate>
+                    <DataTemplate>
+                        <StackPanel Orientation="Horizontal">
+                            <Border Width="20" Height="Auto" Margin="5,0" BorderThickness="1" BorderBrush="Black"  >
+                                <Border.Background>
+                                    <SolidColorBrush Color ="{Binding Color}"/>
+                                </Border.Background>
+                            </Border>
+                            <TextBlock Text="{Binding Name}"></TextBlock>
+                        </StackPanel>
+                    </DataTemplate>
+                </ComboBox.ItemTemplate>
+            </ComboBox>
+        </Grid>
+        <Grid HorizontalAlignment="Left" Height="268" VerticalAlignment="Top" Width="236" Margin="0,0,0,-12">
+            <Label x:Name="colorArea" Margin="10" Background="#FFE0E0E0"/>
+        </Grid>
+        <Grid HorizontalAlignment="Left" Height="268" Margin="500,0,0,-12" VerticalAlignment="Top" Width="192">
+            <ListBox x:Name="tttt" HorizontalAlignment="Left" Height="203" Margin="10,55,0,0" VerticalAlignment="Top" Width="172" SelectionChanged="tttt_SelectionChanged"/>
+            <Button Content="STOCK" HorizontalAlignment="Left" Margin="10,10,0,0" VerticalAlignment="Top" Width="172" Height="40" FontSize="25" HorizontalContentAlignment="Center" Click="Button_Click"/>
+        </Grid>
+
+    </Grid>
+</Window>
