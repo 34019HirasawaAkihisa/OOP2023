@@ -42,7 +42,8 @@ namespace colorChecker {
         }
 
         private void Button_Click(object sender, RoutedEventArgs e) {
-            
+            string getColor = string.Format("R{0}/G{1}/B{2}", sliderRed.Value, sliderGreen.Value, sliderBlue.Value);
+            colorList.Items.Add(getColor);
         }
 
         private void ComboBox_SelectionChanged(object sender, SelectionChangedEventArgs e) {
@@ -57,10 +58,6 @@ namespace colorChecker {
                 brush.Color = mycolor.Color;
                 colorArea.Background = brush;
             }
-        }
-
-        private void tttt_SelectionChanged(object sender, SelectionChangedEventArgs e) {
-
         }
     }
 }
