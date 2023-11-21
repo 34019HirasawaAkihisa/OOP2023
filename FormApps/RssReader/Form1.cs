@@ -69,13 +69,19 @@ namespace RssReader {
         }
 
         private void uTitle_Click(object sender, EventArgs e) {
-            lbRssTitle.SelectedIndex -= 1;
-            wbBrowser.Navigate(itemData[lbRssTitle.SelectedIndex].Link);
+            try {
+                lbRssTitle.SelectedIndex -= 1;
+                wbBrowser.Navigate(itemData[lbRssTitle.SelectedIndex].Link);
+            }
+            catch {}     
         }
 
         private void dTitle_Click(object sender, EventArgs e) {
-            lbRssTitle.SelectedIndex += 1;
-            wbBrowser.Navigate(itemData[lbRssTitle.SelectedIndex].Link);
+            try {
+                lbRssTitle.SelectedIndex += 1;
+                wbBrowser.Navigate(itemData[lbRssTitle.SelectedIndex].Link);
+            }
+            catch {}    
         }
 
         private void btDelete_Click(object sender, EventArgs e) {

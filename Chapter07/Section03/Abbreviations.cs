@@ -51,9 +51,6 @@ namespace Exercise02 {
             }
         }
 
-        public bool Remove(string abb) {
-            
-        }
 
         public IEnumerator<KeyValuePair<string, string>> GetEnumerator() {
             return ((IEnumerable<KeyValuePair<string, string>>)_dict).GetEnumerator();
