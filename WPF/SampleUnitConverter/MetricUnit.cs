@@ -11,7 +11,7 @@ namespace SampleUnitConverter {
             new MetricUnit{Name="mm",Coefficient=1,},
             new MetricUnit{Name="cm",Coefficient=10,},
             new MetricUnit{Name="m",Coefficient=10 * 100,},
-            new MetricUnit{Name="km",Coefficient=10 * 100 * 1000,}
+            new MetricUnit{Name="km",Coefficient=10 * 100 * 1000,},
         };
         
         public static ICollection<MetricUnit> Units { get { return units; } }

@@ -16,7 +16,7 @@ namespace SampleUnitConverter {
                 this.OnPropertyChanged();
             }
         }
-        public double Imperialvalue {
+        public double ImperialValue {
             get { return this.imperialValue; }
             set{this.imperialValue = value;
                 this.OnPropertyChanged();
@@ -41,8 +41,11 @@ namespace SampleUnitConverter {
             this.CurrentImperialUnit = ImperialUnit.Units.First();
 
             this.MetricToImperialUnit = new DelegateCommand(
-                () => this.imperialValue = this.CurrentImperialUnit.FromMetricUnit(
-                    this.CurrentMetricUnit, this.metricValue));
+                () => this.ImperialValue = this.CurrentImperialUnit.FromMetricUnit(
+                    this.CurrentMetricUnit, this.MetricValue));
+            this.ImperialUnitToMetric = new DelegateCommand(
+                () => this.MetricValue = this.CurrentMetricUnit.FromImperialUnit(
+                    this.CurrentImperialUnit, this.ImperialValue));
         }
     }
 }

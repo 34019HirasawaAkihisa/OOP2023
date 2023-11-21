@@ -18,6 +18,21 @@ namespace RssReader {
             InitializeComponent();
         }
 
+        Dictionary<string, string> favoriteDict = new Dictionary<string, string>();
+
+        class favoriteTitle {
+            public string Titles { get; set; }
+            public string URL { get; set; }
+
+            public favoriteTitle(string URL,string Titles) {
+                this.Titles = Titles;
+                this.URL = URL;
+            }
+            public override string ToString() {
+                return Titles;
+            }
+        }
+
         private void btGet_Click(object sender, EventArgs e) {
             if (tbUrl.Text == "")
                 return;
@@ -65,6 +80,42 @@ namespace RssReader {
 
         private void btDelete_Click(object sender, EventArgs e) {
             tbUrl.ResetText();
+        }
+
+        private void rb1_CheckedChanged(object sender, EventArgs e) {
+            tbUrl.Text = "https://news.yahoo.co.jp/rss/topics/business.xml";
+        }
+
+        private void rb2_CheckedChanged(object sender, EventArgs e) {
+            tbUrl.Text = "https://news.yahoo.co.jp/rss/topics/entertainment.xml";
+        }
+
+        private void rb3_CheckedChanged(object sender, EventArgs e) {
+            tbUrl.Text = "https://news.yahoo.co.jp/rss/topics/sports.xml";
+        }
+
+        private void rb4_CheckedChanged(object sender, EventArgs e) {
+            tbUrl.Text = "https://news.yahoo.co.jp/rss/topics/it.xml";
+        }
+
+        private void btfavorite_Click(object sender, EventArgs e) {
+            favoriteTitle favorite = new favoriteTitle(tburlName.Text, tbfavoriteName.Text);
+            if (favoriteDict.ContainsKey(tburlName.Text) || favoriteDict.ContainsValue(tbfavoriteName.Text)) {
+                errorlb.Text = "重複しています";
+            }
+            else {
+                errorlb.Text = "";
+                favoriteDict.Add(tburlName.Text, tbfavoriteName.Text);
+                cbfavorite.Items.Add(favorite);
+
+                tburlName.Clear();
+                tbfavoriteName.Clear();
+            }
+        }
+
+        private void cbfavorite_SelectedIndexChanged(object sender, EventArgs e) {
+            favoriteTitle favorite = (favoriteTitle)cbfavorite.SelectedItem;
+            tbUrl.Text = favorite.URL.ToString();
         }
     }
 }

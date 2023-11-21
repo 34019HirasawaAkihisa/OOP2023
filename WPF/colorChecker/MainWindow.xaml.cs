@@ -33,6 +33,14 @@ namespace colorChecker {
             public Color Color { get; set; }
             public string Name { get; set; }
         }
+        List<MyColor> myColors = new List<MyColor>();
+
+        public class colorStock {
+            public int R { get; set; }
+            public int G { get; set; }
+            public int B { get; set; }
+        }
+
 
         private void slider_ValueChanged(object sender, RoutedPropertyChangedEventArgs<double> e) {
 
@@ -42,8 +50,12 @@ namespace colorChecker {
         }
 
         private void Button_Click(object sender, RoutedEventArgs e) {
-            string getColor = string.Format("R{0}/G{1}/B{2}", sliderRed.Value, sliderGreen.Value, sliderBlue.Value);
-            colorList.Items.Add(getColor);
+            var cList = GetColorList();
+            var color = string.Format("R {0} G {1} B {2} ",sliderRed.Value,sliderGreen.Value,sliderBlue.Value);
+            var getColor = cList.FirstOrDefault(s => s.Color == ((SolidColorBrush)colorArea.Background).Color)?.Name ?? color;
+            MyColor get = new MyColor { Color = ((SolidColorBrush)colorArea.Background).Color, Name = getColor };
+            myColors.Add(get);
+            colorList.Items.Add(get.Name);
         }
 
         private void ComboBox_SelectionChanged(object sender, SelectionChangedEventArgs e) {
@@ -57,6 +69,25 @@ namespace colorChecker {
 
                 brush.Color = mycolor.Color;
                 colorArea.Background = brush;
+            }
+        }
+
+        private void colorList_SelectionChanged(object sender, SelectionChangedEventArgs e) {
+            var cList = GetColorList();
+
+            foreach (var item in cList) {
+                if(colorList.SelectedItem.ToString() == item.Name) {
+                    sliderRed.Value = item.Color.R;
+                    sliderGreen.Value = item.Color.G;
+                    sliderBlue.Value = item.Color.B;
+                }
+            }
+            string[] stock = colorList.SelectedItem.ToString().Split(' ');
+
+            if(stock.Length > 4) {
+                rs.Text = stock[1];
+                gs.Text = stock[3];
+                bs.Text = stock[5];
             }
         }
     }
