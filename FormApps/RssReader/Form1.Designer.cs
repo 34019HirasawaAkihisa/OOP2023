@@ -37,20 +37,18 @@ namespace RssReader {
             this.rb2 = new System.Windows.Forms.RadioButton();
             this.rb3 = new System.Windows.Forms.RadioButton();
             this.rb4 = new System.Windows.Forms.RadioButton();
-            this.tburlName = new System.Windows.Forms.TextBox();
             this.tbfavoriteName = new System.Windows.Forms.TextBox();
             this.cbfavorite = new System.Windows.Forms.ComboBox();
             this.btfavorite = new System.Windows.Forms.Button();
-            this.label1 = new System.Windows.Forms.Label();
             this.label2 = new System.Windows.Forms.Label();
             this.errorlb = new System.Windows.Forms.Label();
             this.SuspendLayout();
             // 
             // btGet
             // 
-            this.btGet.Location = new System.Drawing.Point(1139, 12);
+            this.btGet.Location = new System.Drawing.Point(1139, 11);
             this.btGet.Name = "btGet";
-            this.btGet.Size = new System.Drawing.Size(40, 30);
+            this.btGet.Size = new System.Drawing.Size(53, 30);
             this.btGet.TabIndex = 0;
             this.btGet.Text = "取得";
             this.btGet.UseVisualStyleBackColor = true;
@@ -106,9 +104,9 @@ namespace RssReader {
             // 
             // uTitle
             // 
-            this.uTitle.Location = new System.Drawing.Point(1058, 41);
+            this.uTitle.Location = new System.Drawing.Point(1061, 45);
             this.uTitle.Name = "uTitle";
-            this.uTitle.Size = new System.Drawing.Size(75, 23);
+            this.uTitle.Size = new System.Drawing.Size(88, 23);
             this.uTitle.TabIndex = 6;
             this.uTitle.Text = "上の記事へ";
             this.uTitle.UseVisualStyleBackColor = true;
@@ -116,9 +114,9 @@ namespace RssReader {
             // 
             // dTitle
             // 
-            this.dTitle.Location = new System.Drawing.Point(1139, 42);
+            this.dTitle.Location = new System.Drawing.Point(1155, 45);
             this.dTitle.Name = "dTitle";
-            this.dTitle.Size = new System.Drawing.Size(75, 23);
+            this.dTitle.Size = new System.Drawing.Size(86, 23);
             this.dTitle.TabIndex = 7;
             this.dTitle.Text = "下の記事へ";
             this.dTitle.UseVisualStyleBackColor = true;
@@ -126,9 +124,9 @@ namespace RssReader {
             // 
             // btDelete
             // 
-            this.btDelete.Location = new System.Drawing.Point(1176, 12);
+            this.btDelete.Location = new System.Drawing.Point(1192, 11);
             this.btDelete.Name = "btDelete";
-            this.btDelete.Size = new System.Drawing.Size(39, 30);
+            this.btDelete.Size = new System.Drawing.Size(47, 30);
             this.btDelete.TabIndex = 8;
             this.btDelete.Text = "削除";
             this.btDelete.UseVisualStyleBackColor = true;
@@ -182,18 +180,10 @@ namespace RssReader {
             this.rb4.UseVisualStyleBackColor = true;
             this.rb4.CheckedChanged += new System.EventHandler(this.rb4_CheckedChanged);
             // 
-            // tburlName
-            // 
-            this.tburlName.Font = new System.Drawing.Font("MS UI Gothic", 18F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(128)));
-            this.tburlName.Location = new System.Drawing.Point(1079, 146);
-            this.tburlName.Name = "tburlName";
-            this.tburlName.Size = new System.Drawing.Size(162, 31);
-            this.tburlName.TabIndex = 10;
-            // 
             // tbfavoriteName
             // 
             this.tbfavoriteName.Font = new System.Drawing.Font("MS UI Gothic", 18F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(128)));
-            this.tbfavoriteName.Location = new System.Drawing.Point(1079, 195);
+            this.tbfavoriteName.Location = new System.Drawing.Point(1079, 93);
             this.tbfavoriteName.Name = "tbfavoriteName";
             this.tbfavoriteName.Size = new System.Drawing.Size(162, 31);
             this.tbfavoriteName.TabIndex = 11;
@@ -202,7 +192,7 @@ namespace RssReader {
             // 
             this.cbfavorite.Font = new System.Drawing.Font("MS UI Gothic", 18F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(128)));
             this.cbfavorite.FormattingEnabled = true;
-            this.cbfavorite.Location = new System.Drawing.Point(1077, 278);
+            this.cbfavorite.Location = new System.Drawing.Point(1077, 170);
             this.cbfavorite.Name = "cbfavorite";
             this.cbfavorite.Size = new System.Drawing.Size(162, 32);
             this.cbfavorite.TabIndex = 12;
@@ -210,7 +200,7 @@ namespace RssReader {
             // 
             // btfavorite
             // 
-            this.btfavorite.Location = new System.Drawing.Point(1151, 249);
+            this.btfavorite.Location = new System.Drawing.Point(1148, 146);
             this.btfavorite.Name = "btfavorite";
             this.btfavorite.Size = new System.Drawing.Size(90, 23);
             this.btfavorite.TabIndex = 13;
@@ -218,19 +208,10 @@ namespace RssReader {
             this.btfavorite.UseVisualStyleBackColor = true;
             this.btfavorite.Click += new System.EventHandler(this.btfavorite_Click);
             // 
-            // label1
-            // 
-            this.label1.AutoSize = true;
-            this.label1.Location = new System.Drawing.Point(1212, 131);
-            this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(27, 12);
-            this.label1.TabIndex = 14;
-            this.label1.Text = "URL";
-            // 
             // label2
             // 
             this.label2.AutoSize = true;
-            this.label2.Location = new System.Drawing.Point(1210, 180);
+            this.label2.Location = new System.Drawing.Point(1210, 75);
             this.label2.Name = "label2";
             this.label2.Size = new System.Drawing.Size(29, 12);
             this.label2.TabIndex = 15;
@@ -239,24 +220,22 @@ namespace RssReader {
             // errorlb
             // 
             this.errorlb.AutoSize = true;
-            this.errorlb.Font = new System.Drawing.Font("MS UI Gothic", 18F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(128)));
-            this.errorlb.Location = new System.Drawing.Point(1087, 325);
+            this.errorlb.Font = new System.Drawing.Font("MS UI Gothic", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(128)));
+            this.errorlb.Location = new System.Drawing.Point(1077, 205);
             this.errorlb.Name = "errorlb";
-            this.errorlb.Size = new System.Drawing.Size(0, 24);
+            this.errorlb.Size = new System.Drawing.Size(0, 12);
             this.errorlb.TabIndex = 16;
             // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(1253, 838);
+            this.ClientSize = new System.Drawing.Size(1259, 838);
             this.Controls.Add(this.errorlb);
             this.Controls.Add(this.label2);
-            this.Controls.Add(this.label1);
             this.Controls.Add(this.btfavorite);
             this.Controls.Add(this.cbfavorite);
             this.Controls.Add(this.tbfavoriteName);
-            this.Controls.Add(this.tburlName);
             this.Controls.Add(this.rb4);
             this.Controls.Add(this.rb3);
             this.Controls.Add(this.rb2);
@@ -271,6 +250,7 @@ namespace RssReader {
             this.Controls.Add(this.tbUrl);
             this.Controls.Add(this.btGet);
             this.Name = "Form1";
+            this.Text = "RssReader";
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -291,11 +271,9 @@ namespace RssReader {
         private System.Windows.Forms.RadioButton rb2;
         private System.Windows.Forms.RadioButton rb3;
         private System.Windows.Forms.RadioButton rb4;
-        private System.Windows.Forms.TextBox tburlName;
         private System.Windows.Forms.TextBox tbfavoriteName;
         private System.Windows.Forms.ComboBox cbfavorite;
         private System.Windows.Forms.Button btfavorite;
-        private System.Windows.Forms.Label label1;
         private System.Windows.Forms.Label label2;
         private System.Windows.Forms.Label errorlb;
     }

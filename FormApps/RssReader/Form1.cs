@@ -6,6 +6,7 @@ using System.Drawing;
 using System.Linq;
 using System.Net;
 using System.Text;
+using System.Text.RegularExpressions;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 using System.Xml.Linq;
@@ -24,7 +25,7 @@ namespace RssReader {
             public string Titles { get; set; }
             public string URL { get; set; }
 
-            public favoriteTitle(string URL,string Titles) {
+            public favoriteTitle(string URL, string Titles) {
                 this.Titles = Titles;
                 this.URL = URL;
             }
@@ -73,7 +74,7 @@ namespace RssReader {
                 lbRssTitle.SelectedIndex -= 1;
                 wbBrowser.Navigate(itemData[lbRssTitle.SelectedIndex].Link);
             }
-            catch {}     
+            catch { }
         }
 
         private void dTitle_Click(object sender, EventArgs e) {
@@ -81,7 +82,7 @@ namespace RssReader {
                 lbRssTitle.SelectedIndex += 1;
                 wbBrowser.Navigate(itemData[lbRssTitle.SelectedIndex].Link);
             }
-            catch {}    
+            catch { }
         }
 
         private void btDelete_Click(object sender, EventArgs e) {
@@ -105,16 +106,22 @@ namespace RssReader {
         }
 
         private void btfavorite_Click(object sender, EventArgs e) {
-            favoriteTitle favorite = new favoriteTitle(tburlName.Text, tbfavoriteName.Text);
-            if (favoriteDict.ContainsKey(tburlName.Text) || favoriteDict.ContainsValue(tbfavoriteName.Text)) {
+            favoriteTitle favorite = new favoriteTitle(tbUrl.Text, tbfavoriteName.Text);
+            if (IsUrl(tbUrl.Text) == false) {
+                errorlb.Text = "このURLは正しくありません";
+            }
+            else if (favoriteDict.ContainsKey(tbUrl.Text) || favoriteDict.ContainsValue(tbfavoriteName.Text)) {
                 errorlb.Text = "重複しています";
+            }
+            else if ((tbUrl.Text == "") || (tbfavoriteName.Text == "")) {
+                errorlb.Text = "名前が入力されていません";
             }
             else {
                 errorlb.Text = "";
-                favoriteDict.Add(tburlName.Text, tbfavoriteName.Text);
+                favoriteDict.Add(tbUrl.Text, tbfavoriteName.Text);
                 cbfavorite.Items.Add(favorite);
 
-                tburlName.Clear();
+                tbUrl.Clear();
                 tbfavoriteName.Clear();
             }
         }
@@ -122,6 +129,16 @@ namespace RssReader {
         private void cbfavorite_SelectedIndexChanged(object sender, EventArgs e) {
             favoriteTitle favorite = (favoriteTitle)cbfavorite.SelectedItem;
             tbUrl.Text = favorite.URL.ToString();
+        }
+
+        public static bool IsUrl(string input) {
+            if (string.IsNullOrEmpty(input)) {
+                return false;
+            }
+            return Regex.IsMatch(
+               input,
+               @"^s?https?://[-_.!~*'()a-zA-Z0-9;/?:@&=+$,%#]+$"
+            );
         }
     }
 }
